@@ -22,12 +22,18 @@ class Fraction(object):
             denominator = -denominator
             
         # Reduce the fraction using GCD
-        gcd = self.gcd(abs(numerator), abs(denominator))
-        self.numerator = numerator // gcd
-        self.denominator = denominator // gcd
+        gcd = self.gcd(numerator, denominator)
+        self._numerator = numerator // gcd
+        self._denominator = denominator // gcd
+
+
     def gcd(a, b):
-        #TODO
-        pass
+        # calculated using the euclidean algorithm 
+        if b == 0:
+            return abs(a)
+        else:
+            Fraction.gcd(b, a % b)
+
 
     def get_numerator(self):
         #TODO
@@ -40,8 +46,3 @@ class Fraction(object):
     def get_fraction(self):
         #TODO
         pass
-
-class ZeroDivisionError(Exception):
-    def __init__(self, message="Denominator cannot be zero"):
-        self.message = message
-        super.__init__(self.message)
