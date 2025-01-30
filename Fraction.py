@@ -13,9 +13,8 @@ class Fraction(object):
         if not isinstance(numerator, int) or not isinstance(denominator, int):
             raise TypeError("Both numerator and denominator must be integers")
 
-        # Check for zero denominator
         if denominator == 0:
-            raise ValueError("Denominator cannot be zero")
+            raise ZeroDivisionError
             
         # Handle negative signs
         if denominator < 0:
@@ -24,8 +23,8 @@ class Fraction(object):
             
         # Reduce the fraction using GCD
         gcd = self.gcd(abs(numerator), abs(denominator))
-        self._numerator = numerator // gcd
-        self._denominator = denominator // gcd
+        self.numerator = numerator // gcd
+        self.denominator = denominator // gcd
     def gcd(a, b):
         #TODO
         pass
@@ -41,3 +40,8 @@ class Fraction(object):
     def get_fraction(self):
         #TODO
         pass
+
+class ZeroDivisionError(Exception):
+    def __init__(self, message="Denominator cannot be zero"):
+        self.message = message
+        super.__init__(self.message)
