@@ -32,7 +32,7 @@ class Fraction(object):
         if b == 0:
             return abs(a)
         else:
-            Fraction.gcd(b, a % b)
+            return Fraction.gcd(b, a % b)
 
 
     def get_numerator(self):
