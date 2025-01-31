@@ -52,9 +52,9 @@ class Fraction(object):
         return str(self._denominator)
 
     def get_fraction(self):
-        fraction = self.get_numerator()
+        fraction = str(self._numerator)
 
         if self._denominator != 1:
-            fraction += "/" + self.get_denominator()
+            fraction += "/" + str(self._denominator)
 
         return fraction
