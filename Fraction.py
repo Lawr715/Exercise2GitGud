@@ -42,6 +42,10 @@ class Fraction(object):
     def get_denominator(self):
         return str(self._denominator)
 
-    @property
     def get_fraction(self):
-        return self.get_numerator + "/" + self.get_denominator
+        fraction = self.get_numerator()
+
+        if self._denominator != 1:
+            fraction += "/" + self.get_denominator()
+
+        return fraction
