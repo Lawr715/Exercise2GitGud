@@ -13,9 +13,8 @@ class Fraction(object):
         if not isinstance(numerator, int) or not isinstance(denominator, int):
             raise TypeError("Both numerator and denominator must be integers")
 
-        # Check for zero denominator
         if denominator == 0:
-            raise ValueError("Denominator cannot be zero")
+            raise ZeroDivisionError
             
         # Handle negative signs
         if denominator < 0:
@@ -23,12 +22,18 @@ class Fraction(object):
             denominator = -denominator
             
         # Reduce the fraction using GCD
-        gcd = self.gcd(abs(numerator), abs(denominator))
+        gcd = self.gcd(numerator, denominator)
         self._numerator = numerator // gcd
         self._denominator = denominator // gcd
+
+
     def gcd(a, b):
-        #TODO
-        pass
+        # calculated using the euclidean algorithm 
+        if b == 0:
+            return abs(a)
+        else:
+            return Fraction.gcd(b, a % b)
+
 
     def get_numerator(self):
         #TODO
