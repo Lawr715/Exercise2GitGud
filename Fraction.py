@@ -43,5 +43,9 @@ class Fraction(object):
         return str(self._denominator)
 
     def get_fraction(self):
-        #TODO
-        pass
+        fraction = self.get_numerator()
+
+        if self._denominator != 1:
+            fraction += "/" + self.get_denominator()
+
+        return fraction
