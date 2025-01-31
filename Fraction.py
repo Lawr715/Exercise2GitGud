@@ -22,17 +22,26 @@ class Fraction(object):
             denominator = -denominator
             
         # Reduce the fraction using GCD
-        gcd = self.gcd(numerator, denominator)
+        gcd = 1
+        if numerator != 0:
+            gcd = self.gcd(numerator, denominator)
         self._numerator = numerator // gcd
         self._denominator = denominator // gcd
 
     @staticmethod
     def gcd(a, b):
-        # calculated using the euclidean algorithm 
-        if b == 0:
-            return abs(a)
-        else:
-            return Fraction.gcd(b, a % b)
+        larger_number = abs(a)
+        smaller_number = abs(b)
+
+        if b > a:
+            larger_number = abs(b)
+            smaller_number = abs(a)
+        
+        if smaller_number == 0:
+            return 0
+        for possible_gcd in range(smaller_number, 0, -1):
+            if larger_number % possible_gcd == 0 and smaller_number % possible_gcd == 0:
+                return possible_gcd
 
     @property
     def get_numerator(self):
