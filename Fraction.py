@@ -26,7 +26,7 @@ class Fraction(object):
         self._numerator = numerator // gcd
         self._denominator = denominator // gcd
 
-
+    @staticmethod
     def gcd(a, b):
         # calculated using the euclidean algorithm 
         if b == 0:
@@ -34,14 +34,13 @@ class Fraction(object):
         else:
             Fraction.gcd(b, a % b)
 
-
+    @property
     def get_numerator(self):
-        #TODO
-        pass
+        return str(self._numerator)
 
+    @property
     def get_denominator(self):
-        #TODO
-        pass
+        return str(self._denominator)
 
     def get_fraction(self):
         #TODO
