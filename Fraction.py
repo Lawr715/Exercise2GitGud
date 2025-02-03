@@ -1,22 +1,30 @@
 class Fraction(object):
 
     def __init__(self, numerator=0, denominator=1):
-        # Handle string input
-        if isinstance(numerator, str):
-            numerator = numerator.strip()  # Remove leading/trailing whitespace
-            if '/' in numerator:
-                num, den = numerator.split('/')
-                numerator = int(num)
-                denominator = int(den)
+        # Handle string input with error handling
+        try:
+            if isinstance(numerator, str):
+                numerator = numerator.strip()  # Remove leading/trailing whitespace
+                if '/' in numerator:
+                    parts = numerator.split('/')
+                    if len(parts) != 2:
+                        raise ValueError("Invalid fraction format")
+                    num, den = parts
+                    numerator, denominator = int(num), int(den)
+                else:
+                    numerator = int(numerator)
 
-        # Type checking
-        if not isinstance(numerator, int) or not isinstance(denominator, int):
-            raise TypeError("Both numerator and denominator must be integers")
+            # Type checking
+            if not isinstance(numerator, int) or not isinstance(denominator, int):
+                raise TypeError("Both numerator and denominator must be integers")
 
-        if denominator == 0:
-            raise ZeroDivisionError
-            
+            if denominator == 0:
+                raise ZeroDivisionError("Denominator cannot be zero")
+
+        except (ValueError, TypeError) as e:
+            numerator, denominator = 0, 1  # Default to 0/1 on error
         # Handle negative signs
+
         if denominator < 0:
             numerator = -numerator
             denominator = -denominator
