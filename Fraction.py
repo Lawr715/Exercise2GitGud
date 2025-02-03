@@ -58,9 +58,11 @@ class Fraction(object):
         return str(self._denominator)
 
     def get_fraction(self):
-        fraction = str(self._numerator)
+        if self._denominator == 1:
+            return str(self._numerator)
+        return f"{self._numerator}/{self._denominator}"
 
-        if self._denominator != 1:
-            fraction += "/" + str(self._denominator)
-
-        return fraction
+    def __setattr__(self, name, value):
+        if hasattr(self, name):
+            raise AttributeError("Fraction is immutable")
+        super().__setattr__(name, value)
