@@ -1,5 +1,4 @@
 class Fraction(object):
-
     def __init__(self, numerator=0, denominator=1):
         # Handle string input with error handling
         try:
@@ -23,33 +22,32 @@ class Fraction(object):
 
         except (ValueError, TypeError) as e:
             numerator, denominator = 0, 1  # Default to 0/1 on error
-        # Handle negative signs
 
+        # Handle negative signs
         if denominator < 0:
             numerator = -numerator
             denominator = -denominator
             
         # Reduce the fraction using GCD
-        gcd = 1
-        if numerator != 0:
+        if numerator == 0:
+            self._numerator = 0
+            self._denominator = 1
+        else:
             gcd = self.gcd(numerator, denominator)
-        self._numerator = numerator // gcd
-        self._denominator = denominator // gcd
+            self._numerator = numerator // gcd
+            self._denominator = denominator // gcd
 
     @staticmethod
     def gcd(a, b):
-        larger_number = abs(a)
-        smaller_number = abs(b)
-
-        if b > a:
-            larger_number = abs(b)
-            smaller_number = abs(a)
-        
-        if smaller_number == 0:
+        if a == 0 or b == 0:
             return 0
-        for possible_gcd in range(smaller_number, 0, -1):
-            if larger_number % possible_gcd == 0 and smaller_number % possible_gcd == 0:
-                return possible_gcd
+        
+        a = abs(a)
+        b = abs(b)
+
+        while b != 0:
+            a, b = b, a % b
+        return a
 
     @property
     def get_numerator(self):
